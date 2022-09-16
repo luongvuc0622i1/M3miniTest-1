@@ -78,3 +78,11 @@ INSERT INTO Points (students_id, points) VALUES (18, 88);
 INSERT INTO Points (students_id, points) VALUES (20, 94);
 INSERT INTO Points (students_id, points) VALUES (17, 90);
 INSERT INTO Points (students_id, points) VALUES (21, 89);
+
+select * from Students where students_name like '%Nguyễn%';
+
+SELECT * FROM Students WHERE students_name LIKE '%o%';
+
+SELECT * FROM Students WHERE age >= 24;
+
+SELECT * FROM Students WHERE students_id = 14 OR students_id = 17;
