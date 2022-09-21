@@ -1,26 +1,18 @@
 USE Minitest1;
 
--- Thống kê số lượng học viên các lớp (count)
-SELECT Classes.classes_id, Classes.classes_name, COUNT(students_id) AS 'Số lượng học viên'
-FROM Classes, Students
-WHERE Students.classes_id = Classes.classes_id
-GROUP BY classes_name;
+select count(*) from students;
 
--- Thống kê số lượng học viên tại các tỉnh (count)
-SELECT Address.address_id, Address.address, COUNT(students_id) AS 'Số lượng học viên'
-FROM Address, Students
-WHERE Students.address_id = Address.address_id
-GROUP BY address_id;
+select count(*), address_name from students S inner join address A on S.address_id = A.address_id and A.address_id = 1;
+select count(*), address_name from students S inner join address A on S.address_id = A.address_id and A.address_id = 2;
+select count(*), address_name from students S inner join address A on S.address_id = A.address_id and A.address_id = 3;
+select count(*), address_name from students S inner join address A on S.address_id = A.address_id and A.address_id = 4;
+select count(*), address_name from students S inner join address A on S.address_id = A.address_id and A.address_id = 5;
 
--- Tính điểm trung bình của các khóa học (avg)
-SELECT C.course_Id, C.course_name, AVG(Point)
-FROM Course C JOIN point P
-ON C.Course_Id = P.Course_Id
-GROUP BY C.Course_Id, C.Course_name;
+select avg(points), course_name from points P inner join course C on C.course_id = P.course_id and C.course_id = 1;
+select avg(points), course_name from points P inner join course C on C.course_id = P.course_id and C.course_id = 2;
+select avg(points), course_name from points P inner join course C on C.course_id = P.course_id and C.course_id = 3;
 
--- Đưa ra khóa học có điểm trung bình cao nhất (max)
-SELECT C.course_Id, C.course_name, AVG(Point)
-FROM Course C JOIN point P
-ON C.Course_Id = P.Course_Id
-GROUP BY C.Course_Id, C.Course_name
-HAVING AVG(point) >= ALL(SELECT AVG(point) FROM point GROUP BY point.course_id );
+select C.course_id, C.course_name, avg(points)
+from course C join points P on C.course_id = P.course_id
+group by C.course_id, C.course_name
+having avg(points) >= all (select avg(points) from points group by points.course_id);
